@@ -1,5 +1,10 @@
 // Adder circuit
 
+`define AND and #50
+`define OR or #50
+`define NOT not #50
+`define XOR xor #50
+
 module behavioralFullAdder
 (
     output sum, 
@@ -19,6 +24,17 @@ module structuralFullAdder
     input a, 
     input b, 
     input carryin
+
 );
-    // Your adder code here
+
+ wire AxorB, AxorBxorC, AxorBC, AB;
+
+ `XOR xorGate(AxorB, a, b);
+ `XOR xorGate(sum, AxorB, carryin);
+ `AND andGate(AB, a, b);
+ `AND andGate(AxorBC, carryin, AxorB);
+ `OR orGate( carryout, AB, AxorBC);
+
+
+
 endmodule
